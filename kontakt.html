@@ -340,7 +340,78 @@
         <div class="contact-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
         <div><div class="contact-label">Poradny</div><div class="contact-val">Praha 11 – Chodov, Hráského 2231/25 (po–út)<br>Kamenice, Olivová 1412 (st–čt)</div></div>
       </div>
+      <div class="contact-item">
+        <div class="contact-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></div>
+        <div><div class="contact-label">IČO</div><div class="contact-val">01622676</div></div>
       </div>
+    </div>
+    <div data-r="right">
+      <form class="contact-form" id="dotaz-form">
+        <p style="font-size:.88rem;color:var(--ink2);line-height:1.65;margin-bottom:.3rem;">Chcete se nejdřív jen zeptat — třeba na <strong>volnou kapacitu</strong> nebo cokoliv dalšího, než se objednáte? Napište mi, ozvu se Vám co nejdřív.</p>
+        <div class="form-row">
+          <div class="form-group"><label>Jméno a příjmení</label><input type="text" name="jmeno" required placeholder="Vaše jméno"></div>
+          <div class="form-group"><label>Telefon / e-mail</label><input type="text" name="kontakt" required placeholder="Kam se Vám mohu ozvat"></div>
+        </div>
+        <div class="form-group"><label>Forma konzultace</label>
+          <select name="forma"><option>Osobně – Praha 11 (po–út)</option><option>Osobně – Kamenice (st–čt)</option><option>On-line</option><option>Zatím nevím</option></select>
+        </div>
+        <div class="form-group"><label>Zpráva</label><textarea name="zprava" placeholder="Můžete napsat jen pár slov o tom, co Vás přivádí — nebo se jen zeptat na volný termín…"></textarea></div>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+        <button type="submit" class="form-submit" id="dotaz-submit">Odeslat nezávaznou zprávu</button>
+        <p id="dotaz-status" style="display:none;font-size:.88rem;margin:0;"></p>
+      </form>
+      <script>
+      document.getElementById('dotaz-form').addEventListener('submit', async function(e){
+        e.preventDefault();
+        var f=this, btn=document.getElementById('dotaz-submit'), st=document.getElementById('dotaz-status');
+        btn.disabled=true; btn.textContent='Odesílám…';
+        try{
+          var r=await fetch('https://strankyprovas.cz/form/avis.php',{method:'POST',body:new FormData(f)});
+          var d=await r.json();
+          st.style.display='block';
+          if(d.ok){ st.style.color='#3f6e60'; st.textContent='Děkuji, zpráva je odeslaná. Ozvu se Vám co nejdřív.'; f.reset(); btn.textContent='Odesláno ✓'; }
+          else{ st.style.color='#b3261e'; st.textContent=d.error||'Odeslání se nepodařilo, zkuste to prosím znovu.'; btn.disabled=false; btn.textContent='Odeslat nezávaznou zprávu'; }
+        }catch(err){
+          st.style.display='block'; st.style.color='#b3261e';
+          st.textContent='Odeslání se nepodařilo — napište mi prosím na iva.semikova@seznam.cz.';
+          btn.disabled=false; btn.textContent='Odeslat nezávaznou zprávu';
+        }
+      });
+      </script>
+    </div>
+  </div>
+  <div class="map-duo">
+    <div class="map-card" data-r>
+      <div class="cap">Terapeutická poradna Praha 11 – Chodov <span>Hráského 2231/25 · po–út</span></div>
+      <iframe src="https://maps.google.com/maps?q=Hr%C3%A1sk%C3%A9ho%202231%2F25%2C%20Praha%2011&output=embed" loading="lazy" title="Mapa – poradna Praha"></iframe>
+    </div>
+    <div class="map-card" data-r>
+      <div class="cap">Terapeutická poradna Kamenice <span>Olivová 1412 · st–čt</span></div>
+      <iframe src="https://maps.google.com/maps?q=Olivov%C3%A1%201412%2C%20Kamenice&output=embed" loading="lazy" title="Mapa – poradna Kamenice"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a href="index.html" class="footer-logo">AVIS - TERAPIE<span>.</span></a>
+      <p class="footer-desc">Poradenská psychoterapie a osobnostní rozvoj v daseinsanalytickém směru.<br>Mgr. Iva Semíková, psychoterapeut · IČO 01622676</p>
+    </div>
+    <div class="footer-col">
+      <h4>Menu</h4>
+      <ul><li><a href="index.html">Úvod</a></li><li><a href="index.html#ocekavat">Co můžete očekávat</a></li><li><a href="o-mne.html">O mně</a></li><li><a href="cenik.html">Ceník a podmínky</a></li><li><a href="kontakt.html">Kontakt</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Poradny</h4>
+      <ul class="footer-hours"><li><span>Praha 11 – Chodov</span><span>po–út</span></li><li><span>Kamenice</span><span>st–čt</span></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontakt</h4>
+      <ul><li><a href="tel:+420777312500">+420 777 312 500</a></li><li><a href="mailto:iva.semikova@seznam.cz">iva.semikova@seznam.cz</a></li><li><a href="kontakt.html">Objednání</a></li></ul>
+    </div>
+  </div>
   <div class="footer-bottom">
     <p class="footer-copy">© 2026 AVIS - TERAPIE · Vytvořeno s ❤️ od <a href="https://strankyprovas.cz">StránkyProVás</a></p>
     <p class="footer-copy">Všechna práva vyhrazena</p>
