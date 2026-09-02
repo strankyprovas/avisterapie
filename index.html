@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AVIS - TERAPIE · Mgr. Iva Semíková – poradenská psychoterapie Kamenice, Praha</title>
+  <meta name="description" content="Poradenská psychoterapie a osobnostní rozvoj v daseinsanalytickém směru. Osobně v Kamenici a Praze 11, nebo on-line.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    img { max-width: 100%; display: block; }
+    :root {
+      --paper:#fbf9fc; --cream:#f5f1f8; --cream2:#e8e1f0;
+      --c1:#8b7ba6; --c2:#6c5d89; --c3:#4e4468;
+      --acc:#c9a2bb; --acc2:#a5748f;
+      --ink:#221f26; --ink2:#3d3a44; --muted:#726e79; --line:#ddd4e6;
+      --c1soft:rgba(139,123,166,.14); --c1ring:rgba(139,123,166,.18);
+      --shadow:0 22px 55px rgba(78,68,104,.13); --btnsh:0 12px 28px rgba(78,68,104,.28);
+      --bline:rgba(245,241,248,.14); --btxt:rgba(245,241,248,.75); --btxt2:rgba(245,241,248,.6);
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--paper); color: var(--ink); overflow-x: hidden; -webkit-font-smoothing: antialiased;  }
+    ::selection { background: var(--c3); color: #fff; }
+    #progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; background: var(--c1); transform-origin: left; transform: scaleX(0); z-index: 9998; transition: transform .1s linear; }
+
+    /* NAV */
+    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.5rem 5%; display: flex; align-items: center; justify-content: space-between; transition: all .4s var(--ease); }
+    #navbar.scrolled { background: rgba(255,255,255,.9); background: color-mix(in srgb, var(--paper) 94%, transparent); backdrop-filter: blur(14px); padding: .95rem 5%; box-shadow: 0 1px 0 var(--line); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 600; color: var(--c3); text-decoration: none; letter-spacing: .01em; line-height: 1; }
+    .nav-logo span { color: var(--acc2); }
+    .nav-links { display: flex; gap: 2.1rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--ink2); text-decoration: none; font-size: .84rem; font-weight: 500; transition: color .25s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; right: 0; height: 1.5px; background: var(--c1); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
+    .nav-links a:hover { color: var(--c3); }
+    .nav-links a:hover::after, .nav-links a.on::after { transform: scaleX(1); }
+    .nav-links a.on { color: var(--c3); }
+    .nav-cta { font-size: .82rem; font-weight: 600; color: #fff; background: var(--c3); padding: .75rem 1.6rem; border: none; cursor: pointer; text-decoration: none; transition: all .3s; border-radius: 999px; }
+    .nav-cta:hover { background: var(--c2); transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 26px; height: 2px; background: var(--c3); transition: all .3s; }
+    #mobile-nav { display: none; position: fixed; inset: 0; background: var(--cream); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; }
+    #mobile-nav.open { display: flex; }
+    #mobile-nav a { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 500; color: var(--c3); text-decoration: none; }
+    #mobile-nav a:hover { color: var(--acc2); font-style: italic; }
+    .close-nav { position: absolute; top: 2rem; right: 6%; background: none; border: none; color: var(--c3); font-size: 2rem; cursor: pointer; }
+
+    /* SHARED */
+    section { padding: 7rem 8%; }
+    .eyebrow { font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--c2); margin-bottom: 1.1rem; display: inline-flex; align-items: center; gap: .8rem; }
+    .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--c1); }
+    .eyebrow.center::before { display: none; }
+    h1.title, h2.title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.3rem, 4.2vw, 3.6rem); font-weight: 500; line-height: 1.12; margin-bottom: 1.3rem; color: var(--c3); }
+    .title em { font-style: italic; color: var(--acc2); }
+    .lead { font-size: 1rem; line-height: 1.85; color: var(--ink2); max-width: 620px; }
+    .sec-head { text-align: center; max-width: 680px; margin: 0 auto 3.2rem; }
+    .sec-head .eyebrow { justify-content: center; }
+    .sec-head .eyebrow::before { display: none; }
+    .sec-head .lead { margin: 0 auto; }
+    .btn-solid { background: var(--c3); color: #fff; padding: 1.05rem 2.3rem; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: .88rem; font-weight: 600; text-decoration: none; display: inline-block; border-radius: 999px; transition: all .3s; }
+    .btn-solid:hover { background: var(--c2); transform: translateY(-2px); box-shadow: var(--btnsh); }
+    .btn-line { background: transparent; color: var(--c3); padding: 1.05rem 2.3rem; border: 1px solid var(--c1); font-size: .88rem; font-weight: 500; text-decoration: none; display: inline-block; border-radius: 999px; transition: all .3s; }
+    .btn-line:hover { background: var(--c3); color: #fff; border-color: var(--c3); }
+
+    /* HERO (index) */
+    #hero { min-height: 100vh; background: linear-gradient(165deg, var(--paper) 0%, var(--cream2) 100%); display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: 4rem; padding: 8rem 8% 4rem; }
+    .hero-left { max-width: 580px; }
+    .hero-eyebrow { font-size: .74rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--c2); margin-bottom: 1.6rem; display: inline-flex; align-items: center; gap: 1rem; opacity: 0; animation: fadeUp .9s .2s var(--ease) forwards; }
+    .hero-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--c1); }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem, 5vw, 4.4rem); font-weight: 500; line-height: 1.1; color: var(--c3); margin-bottom: 1.4rem; opacity: 0; animation: fadeUp .9s .34s var(--ease) forwards; }
+    .hero-title em { font-style: italic; color: var(--acc2); }
+    .hero-sub { font-size: 1.05rem; font-weight: 300; line-height: 1.85; color: var(--ink2); max-width: 470px; margin-bottom: 1.6rem; opacity: 0; animation: fadeUp .9s .5s var(--ease) forwards; }
+    .hero-sub strong { font-weight: 600; color: var(--c3); }
+    .hero-note { display: inline-flex; align-items: center; gap: .55rem; font-size: .85rem; color: var(--c2); background: var(--c1soft); padding: .5rem 1rem; border-radius: 999px; margin-bottom: 2.2rem; opacity: 0; animation: fadeUp .9s .58s var(--ease) forwards; }
+    .hero-note svg { width: 17px; height: 17px; flex-shrink: 0; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 2rem; opacity: 0; animation: fadeUp .9s .66s var(--ease) forwards; }
+    .hero-poj { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; font-size: .78rem; color: var(--muted); opacity: 0; animation: fadeUp .9s .8s var(--ease) forwards; }
+    .hero-poj b { color: var(--c2); font-weight: 600; }
+    .hero-right { position: relative; display: flex; justify-content: center; }
+    .hero-img { width: 100%; max-width: 440px; height: 580px; object-fit: cover; object-position: top; border-radius: 18px; box-shadow: var(--shadow); background: linear-gradient(135deg, var(--c1), var(--c3)); }
+    .hero-chip { position: absolute; bottom: 1.6rem; left: -1rem; background: #fff; border-radius: 14px; box-shadow: var(--shadow); padding: .8rem 1.2rem; display: flex; align-items: center; gap: .8rem; }
+    .hero-chip img { width: 44px; height: 44px; }
+    .hero-chip strong { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--c3); display: block; line-height: 1.15; }
+    .hero-chip span { font-size: .72rem; color: var(--muted); }
+
+    /* PAGE HEADER (podstránky) */
+    .page-head { background: linear-gradient(165deg, var(--paper) 0%, var(--cream2) 100%); padding: 10rem 8% 4rem; text-align: center; }
+    .page-head .eyebrow { justify-content: center; }
+    .page-head .eyebrow::before { display: none; }
+    .page-head .lead { margin: 0 auto; }
+
+    /* QUOTE STRIP */
+    .quote-strip { background: var(--c3); padding: 3.4rem 8%; text-align: center; }
+    .quote-strip blockquote { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-style: italic; font-weight: 500; color: #fff; max-width: 800px; margin: 0 auto .8rem; line-height: 1.5; }
+    .quote-strip cite { font-style: normal; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--acc); }
+
+    /* CARDS */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1150px; margin: 0 auto; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+    .card { background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 2rem 1.9rem; transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s; }
+    .card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: transparent; }
+    .card .ico { width: 50px; height: 50px; border-radius: 50%; background: var(--c1soft); color: var(--c2); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+    .card .ico svg { width: 24px; height: 24px; }
+    .card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 600; color: var(--c3); margin-bottom: .4rem; }
+    .card p { font-size: .87rem; color: var(--muted); line-height: 1.65; }
+    .card.on-paper { background: var(--paper); }
+
+    /* OCEKAVAT */
+    #ocekavat { background: var(--cream); }
+    .oc-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 5rem; align-items: start; max-width: 1200px; margin: 0 auto; }
+    .oc-text p { font-size: .97rem; line-height: 1.9; color: var(--ink2); margin-bottom: 1.3rem; }
+    .oc-side { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 2.2rem; position: sticky; top: 120px; }
+    .oc-side h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--c3); margin-bottom: 1.2rem; }
+    .oc-side ul { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+    .oc-side li { display: flex; gap: .7rem; align-items: flex-start; font-size: .9rem; color: var(--ink2); line-height: 1.5; }
+    .oc-side li::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--c1); flex-shrink: 0; margin-top: .45em; }
+
+    /* SLUZBY */
+    .sluzba-card { background: var(--cream); border: 1px solid var(--line); border-radius: 18px; padding: 2.4rem 2.2rem; display: flex; flex-direction: column; transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+    .sluzba-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .sluzba-card .tag { align-self: flex-start; font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--c2); background: var(--c1soft); padding: .35rem .9rem; border-radius: 999px; margin-bottom: 1.2rem; }
+    .sluzba-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 600; color: var(--c3); margin-bottom: .7rem; }
+    .sluzba-card p { font-size: .9rem; color: var(--ink2); line-height: 1.75; margin-bottom: 1rem; }
+    .sluzba-card .foot { margin-top: auto; padding-top: 1rem; border-top: 1px dashed var(--line); font-size: .82rem; color: var(--muted); display: flex; align-items: center; gap: .5rem; }
+    .sluzba-card .foot svg { width: 16px; height: 16px; color: var(--c2); flex-shrink: 0; }
+
+
+    /* POJIŠŤOVNY */
+    #pojistovny { background: var(--c3); color: var(--cream); text-align: center; }
+    #pojistovny h2.title { color: #fff; }
+    #pojistovny h2.title em { color: var(--acc); }
+    #pojistovny .eyebrow { color: var(--acc); justify-content: center; }
+    #pojistovny .eyebrow::before { display: none; }
+    #pojistovny .lead { color: var(--btxt); margin: 0 auto 2.4rem; }
+    .poj-chips { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .poj-chip { background: rgba(255,255,255,.06); border: 1px solid var(--bline); border-radius: 14px; padding: 1.1rem 1.7rem; min-width: 130px; }
+    .poj-chip b { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: #fff; line-height: 1.1; }
+    .poj-chip span { font-size: .74rem; color: var(--btxt2); }
+    .poj-note { margin-top: 2rem; font-size: .82rem; color: var(--btxt2); max-width: 620px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+
+    /* PORADNY */
+    .poradna-card { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+    .poradna-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .poradna-card img { height: 260px; width: 100%; object-fit: cover; }
+    .poradna-card .body { padding: 1.7rem 1.9rem; }
+    .poradna-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 600; color: var(--c3); margin-bottom: .35rem; }
+    .poradna-card .adr { font-size: .88rem; color: var(--ink2); margin-bottom: .5rem; }
+    .poradna-card .dny { display: inline-flex; align-items: center; gap: .5rem; font-size: .78rem; font-weight: 600; color: var(--c2); background: var(--c1soft); padding: .35rem .9rem; border-radius: 999px; }
+
+    /* O MNĚ page */
+    .omne-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 5rem; align-items: start; max-width: 1200px; margin: 0 auto; }
+    .omne-figure { position: sticky; top: 120px; }
+    .omne-figure img { width: 100%; height: 560px; object-fit: cover; object-position: top; border-radius: 18px; box-shadow: var(--shadow); }
+    .omne-badge { display: flex; align-items: center; gap: 1rem; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.3rem; margin-top: 1.2rem; }
+    .omne-badge img { width: 54px; height: 54px; flex-shrink: 0; }
+    .omne-badge strong { display: block; font-size: .9rem; color: var(--c3); }
+    .omne-badge span { font-size: .78rem; color: var(--muted); }
+    .omne-text p { font-size: .96rem; line-height: 1.9; color: var(--ink2); margin-bottom: 1.25rem; }
+    .omne-text a { color: var(--c2); }
+
+    /* EDU / TIMELINE */
+    .edu-list { max-width: 850px; margin: 0 auto; }
+    .edu-item { display: grid; grid-template-columns: 190px 1fr; gap: 2rem; padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
+    .edu-item:last-child { border-bottom: none; }
+    .edu-item .kdy { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--acc2); }
+    .edu-item h3 { font-size: 1rem; font-weight: 600; color: var(--c3); margin-bottom: .3rem; }
+    .edu-item p { font-size: .87rem; color: var(--muted); line-height: 1.7; }
+    .edu-hours { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .7rem; }
+    .edu-hours span { font-size: .74rem; color: var(--c2); background: var(--c1soft); padding: .3rem .8rem; border-radius: 999px; }
+
+    /* CENÍK */
+    .cenik-list { max-width: 760px; margin: 0 auto; }
+    .cenik-row { display: flex; align-items: baseline; gap: 1rem; padding: 1.4rem 0; border-bottom: 1px solid var(--line); }
+    .cenik-row:last-child { border-bottom: none; }
+    .cenik-name { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; color: var(--c3); }
+    .cenik-name small { display: block; font-family: 'Inter', sans-serif; font-size: .82rem; color: var(--muted); margin-top: .2rem; max-width: 480px; line-height: 1.6; }
+    .cenik-dots { flex: 1; border-bottom: 1px dotted var(--line); transform: translateY(-6px); }
+    .cenik-price { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--acc2); white-space: nowrap; }
+    .cenik-note { text-align: center; margin-top: 2.2rem; font-size: .84rem; color: var(--muted); }
+
+    /* PODMÍNKY */
+    .podm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 1050px; margin: 0 auto; }
+    .podm-card { background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 1.9rem 1.9rem; }
+    .podm-card h3 { display: flex; align-items: center; gap: .7rem; font-size: 1rem; font-weight: 600; color: var(--c3); margin-bottom: .7rem; }
+    .podm-card h3 svg { width: 20px; height: 20px; color: var(--c2); flex-shrink: 0; }
+    .podm-card p, .podm-card li { font-size: .87rem; color: var(--ink2); line-height: 1.75; }
+    .podm-card p + p { margin-top: .6rem; }
+    .podm-card ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; margin-top: .4rem; }
+    .podm-card li { display: flex; gap: .6rem; }
+    .podm-card li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--c1); flex-shrink: 0; margin-top: .5em; }
+    .gdpr-box { max-width: 1050px; margin: 1.5rem auto 0; background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 1.9rem 2rem; }
+    .gdpr-box h3 { font-size: 1rem; font-weight: 600; color: var(--c3); margin-bottom: .7rem; }
+    .gdpr-box p { font-size: .84rem; color: var(--muted); line-height: 1.75; margin-bottom: .5rem; }
+
+    /* KONTAKT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 5rem; align-items: start; max-width: 1200px; margin: 0 auto; }
+    .contact-reass { background: var(--cream); border: 1px solid var(--line); border-radius: 14px; padding: 1.3rem 1.5rem; display: flex; gap: .9rem; align-items: flex-start; margin-bottom: 2rem; }
+    .contact-reass svg { width: 22px; height: 22px; color: var(--c2); flex-shrink: 0; margin-top: 2px; }
+    .contact-reass p { font-size: .88rem; color: var(--ink2); line-height: 1.6; }
+    .contact-item { display: flex; gap: 1.3rem; align-items: flex-start; margin-bottom: 1.7rem; }
+    .contact-ico { width: 46px; height: 46px; flex-shrink: 0; border-radius: 50%; background: var(--cream2); color: var(--c2); display: flex; align-items: center; justify-content: center; }
+    .contact-ico svg { width: 20px; height: 20px; }
+    .contact-label { font-size: .66rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--c2); margin-bottom: .25rem; }
+    .contact-val { font-size: .96rem; color: var(--ink); line-height: 1.55; }
+    .contact-val a { color: var(--ink); text-decoration: none; }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; background: #fff; padding: 2.4rem; border-radius: 18px; box-shadow: var(--shadow); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .45rem; }
+    .form-group label { font-size: .66rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .form-group input, .form-group textarea, .form-group select { background: var(--paper); border: 1px solid var(--line); padding: .9rem 1.1rem; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: .9rem; color: var(--ink); outline: none; transition: border-color .3s, box-shadow .3s; resize: none; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--c1); box-shadow: 0 0 0 3px var(--c1ring); }
+    .form-group textarea { height: 110px; }
+    .form-submit { background: var(--c3); color: #fff; border: none; padding: 1.05rem 2.5rem; cursor: pointer; border-radius: 999px; font-family: 'Inter', sans-serif; font-size: .88rem; font-weight: 600; transition: all .3s; }
+    .form-submit:hover { background: var(--c2); box-shadow: var(--btnsh); }
+    .map-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 1200px; margin: 3.5rem auto 0; }
+    .map-card { border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: var(--cream); }
+    .map-card .cap { padding: .9rem 1.3rem; font-size: .85rem; font-weight: 600; color: var(--c3); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .map-card .cap span { font-weight: 400; color: var(--muted); }
+    .map-card iframe { width: 100%; height: 260px; border: none; display: block; filter: grayscale(.3); }
+
+    /* CTA banda */
+    .cta-band { background: var(--cream); text-align: center; }
+    .cta-band .title { margin-bottom: .8rem; }
+    .cta-band .lead { margin: 0 auto 2rem; }
+
+    /* FOOTER */
+    footer { background: var(--c3); padding: 4.5rem 8% 2.2rem; color: var(--cream); }
+    .footer-grid { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--bline); margin-bottom: 2rem; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; color: var(--cream); text-decoration: none; display: block; margin-bottom: 1rem; }
+    .footer-logo span { color: var(--acc); }
+    .footer-desc { font-size: .84rem; color: var(--btxt2); line-height: 1.8; }
+    .footer-col h4 { font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--btxt2); margin-bottom: 1.3rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
+    .footer-col ul a, .footer-col ul li { font-size: .84rem; color: var(--btxt2); text-decoration: none; transition: color .25s; }
+    .footer-col ul a:hover { color: var(--acc); }
+    .footer-hours li { display: flex; justify-content: space-between; gap: 1rem; font-size: .8rem; padding-bottom: .55rem; margin-bottom: .55rem; border-bottom: 1px solid var(--bline); }
+    .footer-hours li:last-child { border-bottom: none; }
+    .footer-hours li span:last-child { color: var(--btxt); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-size: .76rem; color: var(--btxt2); }
+    .footer-copy a { color: var(--acc); text-decoration: none; }
+
+    #back-top { position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px; border-radius: 50%; background: var(--c3); color: #fff; border: none; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all .3s; z-index: 500; }
+    #back-top.show { opacity: 1; visibility: visible; }
+    #back-top:hover { background: var(--c2); }
+
+    [data-r] { opacity: 0; transform: translateY(34px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+    [data-r="left"] { transform: translateX(-34px); }
+    [data-r="right"] { transform: translateX(34px); }
+    [data-r].visible { opacity: 1; transform: none; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } [data-r] { opacity: 1 !important; transform: none !important; } }
+
+    @media (max-width: 1024px) {
+      section { padding: 5.5rem 6%; }
+      #hero { grid-template-columns: 1fr; padding: 8rem 6% 3rem; }
+      .hero-img { height: 70vw; min-height: 400px; }
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+      .oc-grid, .omne-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .oc-side, .omne-figure { position: static; }
+      .omne-figure img { height: 420px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+      .edu-item { grid-template-columns: 1fr; gap: .4rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      #navbar { padding: 1.3rem 6%; }
+      .grid-3, .grid-2, .podm-grid, .map-duo { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 480px) { section { padding: 4.5rem 5%; } .hero-btns { flex-direction: column; align-items: stretch; } .btn-solid, .btn-line { text-align: center; } }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">AVIS - TERAPIE<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="on">Úvod</a></li>
+    <li><a href="index.html#ocekavat" >Co můžete očekávat</a></li>
+    <li><a href="o-mne.html" >O mně</a></li>
+    <li><a href="cenik.html" >Ceník a podmínky</a></li>
+    <li><a href="kontakt.html" >Kontakt</a></li>
+  </ul>
+  <a href="kontakt.html" class="nav-cta">Objednat se</a>
+  <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+</nav>
+
+<div id="mobile-nav">
+  <button class="close-nav" id="close-nav">✕</button>
+  <a href="index.html">Úvod</a>
+  <a href="index.html#ocekavat">Co můžete očekávat</a>
+  <a href="o-mne.html">O mně</a>
+  <a href="cenik.html">Ceník a podmínky</a>
+  <a href="kontakt.html">Kontakt</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Kamenice · Praha 11 · on-line</div>
+    <h1 class="hero-title">Poradenská psychoterapie a <em>osobnostní rozvoj</em></h1>
+    <p class="hero-sub"><strong>Mgr. Iva Semíková, psychoterapeut.</strong> Bezpečný prostor, kde se můžete zastavit, být sami sebou a na to, co prožíváte, už nebýt sami.</p>
+    <div class="hero-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg> Řádná členka ČAP · ctím etický kodex, mlčenlivost a důvěru</div>
+    <div class="hero-btns">
+      <a href="kontakt.html" class="btn-solid">Objednat se</a>
+      <a href="#ocekavat" class="btn-line">Co můžete očekávat</a>
+    </div>
+    <div class="hero-poj"><b>Pojišťovny přispívají:</b> VZP · OZP · ZPŠ · ZPMVČR · RBP <span>— program „Duševní zdraví"</span></div>
+  </div>
+  <div class="hero-right">
+    <img class="hero-img" src="photos/portret.jpg" alt="Mgr. Iva Semíková, psychoterapeut">
+    <div class="hero-chip"><img src="photos/cap-odznak.png" alt="ČAP – řádná členka"><div><strong>Česká asociace pro psychoterapii</strong><span>řádná členka · ČSD</span></div></div>
+  </div>
+</section>
+
+<div class="quote-strip">
+  <blockquote>„Nejtěžší v životě je užívání toho nejvlastnějšího."</blockquote>
+  <cite>prof. Anna Hogenová · citace z dopisu F. Hölderlina z r. 1801</cite>
+</div>
+
+<!-- CO MŮŽETE OČEKÁVAT -->
+<section id="ocekavat">
+  <div class="oc-grid">
+    <div class="oc-text" data-r="left">
+      <div class="eyebrow">Co můžete očekávat</div>
+      <h2 class="title">Terapie v <em>daseinsanalytickém</em> směru</h2>
+      <p>Ráda bych Vám nabídla terapii v daseinsanalytickém směru, který je mi svou filozofií a přístupem k člověku velmi blízký. V základu daseinsanalýzy je metoda rozhovoru, „vrozumívání" se do situace druhého, bez předem daných konstruktů a technik – a vytvoření prostoru pro bytostné setkání, které je onou filozofickou péčí o duši.</p>
+      <p>Můžete očekávat atmosféru přijetí, bezpečný prostor bez tlaku, otevřenost, partnerský přístup a respekt k Vaší jedinečnosti a životnímu příběhu. V terapii je čas a prostor jenom Váš. Zde se můžete zastavit, vše si v klidu promýšlet, pojmenovávat, být sami sebou a u sebe.</p>
+      <p>V procesu terapie jde v podstatě o hledání rovnováhy mezi láskou a svobodou ve vztazích, o zodpovězení bytostné otázky <em>„Jak být sám sebou a zároveň s druhými"</em> (doc. PhDr. Oldřich Čálek, CSc.). Protože potřeby každého člověka jsou zcela individuální, může se jednat o jedno sezení, spolupráci na několik týdnů, ale i na mnoho let. Záleží jen na Vás, na Vaší motivaci a touze po změně.</p>
+      <p>Pokud se rozhodnete pro terapii a objednáte se, ráda Vás budu doprovázet na Vaší cestě k větší osobní pohodě, autentickému prožívání, vnitřní svobodě a životu „z vlastního pramene". Těším se na setkání s Vámi!</p>
+    </div>
+    <aside class="oc-side" data-r="right">
+      <h3>V rámci setkávání můžeme využít</h3>
+      <ul>
+        <li>terapeutický rozhovor – základ daseinsanalytického přístupu</li>
+        <li>relaxaci s prvky mindfulness</li>
+        <li>aktivní imaginaci</li>
+      </ul>
+      <h3 style="margin-top:1.8rem;">Jak setkávání probíhá</h3>
+      <ul>
+        <li>první sezení je seznamovací – domluvíme si konkrétní podobu spolupráce</li>
+        <li>frekvence i délka spolupráce je individuální, ve Vašem tempu</li>
+        <li>osobně v Kamenici či Praze, on-line, nebo kombinovaně</li>
+      </ul>
+      <a href="cenik.html" class="btn-line" style="margin-top:1.8rem;">Ceník a podmínky</a>
+    </aside>
+  </div>
+</section>
+
+<!-- TÉMATA -->
+<section id="temata">
+  <div class="sec-head" data-r>
+    <div class="eyebrow center">S čím pomáhám</div>
+    <h2 class="title">Nejčastější témata, se kterými <em>klienti přicházejí</em></h2>
+  </div>
+  <div class="grid-3">
+    <div class="card" data-r><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s5 4 5 9a5 5 0 0 1-10 0c0-2 1-3 1-3s0 2 2 2c0-3 2-5 2-8z"/></svg></div><h3>Stres, úzkosti, rozladění, hněv</h3><p>Vnitřní neklid a napětí, které vás vyčerpává v práci i doma.</p></div>
+    <div class="card" data-r><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></div><h3>Únava, vyhoření, deprese</h3><p>Velká únava, syndrom vyhoření, deprese a ztráta smyslu.</p></div>
+    <div class="card" data-r><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg></div><h3>Životní změny</h3><p>Náročná období, existenční nejistota a rozhodnutí, na která nemusíte být sami.</p></div>
+    <div class="card" data-r><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></div><h3>Psychosomatické potíže</h3><p>Když tělo mluví za duši – hledání souvislostí mezi prožíváním a zdravím.</p></div>
+    <div class="card" data-r><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-3.5 3-6 7-6s7 2.5 7 6"/></svg></div><h3>Sebepoznání a sebedůvěra</h3><p>Sebepřijetí, porozumění sobě samému a vědomé kroky ke změně.</p></div>
+    <div class="card" data-r><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="9" r="3.5"/><circle cx="16.5" cy="9" r="3.5" opacity=".55"/><path d="M2.5 20c0-3 2.5-5 6-5s6 2 6 5M13 15.3c.5-.2 1-.3 1.5-.3 3.5 0 6 2 6 5" opacity=".8"/></svg></div><h3>Vztahy a osamělost</h3><p>Partnerské a rodinné vztahy, pocity osamělosti a hledání blízkosti.</p></div>
+  </div>
+  <div class="grid-3" style="margin-top:1.5rem;grid-template-columns:1fr;max-width:1150px;">
+    <div class="card" data-r style="display:flex;gap:1.4rem;align-items:center;"><div class="ico" style="margin-bottom:0;flex-shrink:0;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6.5" r="3"/><circle cx="17" cy="10" r="2.2"/><path d="M3.5 21c0-3.5 2.4-5.5 5.5-5.5s5.5 2 5.5 5.5M14.6 15.9c.7-.3 1.5-.4 2.4-.4 2.5 0 4.5 1.6 4.5 4.5" opacity=".85"/></svg></div><div><h3 style="margin-bottom:.2rem;">Rodičovství</h3><p>Podpora v náročné a krásné roli rodiče – od nejistoty po hledání vlastní cesty.</p></div></div>
+  </div>
+</section>
+
+<!-- SLUŽBY -->
+<section id="sluzby" style="background:var(--cream);">
+  <div class="sec-head" data-r>
+    <div class="eyebrow center">Služby</div>
+    <h2 class="title">Individuální terapie <em>pro dospělé i mladistvé</em></h2>
+  </div>
+  <div class="grid-2">
+    <div class="sluzba-card" data-r>
+      <span class="tag">Dospělí</span>
+      <h3>Individuální terapie pro dospělé</h3>
+      <p>Individuální terapie poskytuje bezpečný prostor a čas zastavit se v každodenním obstarávání. Je to místo, kde se můžete věnovat jen sami sobě – svým potřebám, pocitům, emocím, vše znovu a nahlas promyslet, objevit jiný úhel pohledu nebo se otevřít novým možnostem.</p>
+      <div class="foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Osobně, on-line nebo kombinovaně – dle vzájemné dohody</div>
+    </div>
+    <div class="sluzba-card" data-r>
+      <span class="tag">Mladiství 16+</span>
+      <h3>Individuální terapie pro mladistvé</h3>
+      <p>Terapie pro mladistvé poskytuje dospívajícím bezpečné místo bez tlaku a nároku na výkon, v atmosféře přijetí a porozumění. Nabízí prostor pro sdílení jejich situace, pocitů, emocí a potřeb, spojených s náročným obdobím dospívání.</p>
+      <div class="foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Pouze formou osobního setkání · na prvním sezení je nezbytná přítomnost rodiče</div>
+    </div>
+  </div>
+  <p class="poj-note" data-r>O příspěvek si požádáte v aplikaci své pojišťovny. Výjimkou je VZP, která má aplikaci pro terapeuty – uskutečněné sezení tam zadávám já, potřebuji k tomu pouze Vaše číslo pojištěnce.</p>
+</section>
+
+<!-- PORADNY -->
+<section id="poradny">
+  <div class="sec-head" data-r>
+    <div class="eyebrow center">Kde se potkáme</div>
+    <h2 class="title">Dvě terapeutické <em>poradny</em></h2>
+  </div>
+  <div class="grid-2">
+    <div class="poradna-card" data-r>
+      <img src="photos/poradna-praha.jpg" alt="Terapeutická poradna Praha 11 – Chodov">
+      <div class="body"><h3>Praha 11 – Chodov</h3><p class="adr">Hráského 2231/25, Praha 11</p><span class="dny">pondělí – úterý</span></div>
+    </div>
+    <div class="poradna-card" data-r>
+      <img src="photos/poradna-kamenice.jpg" alt="Terapeutická poradna Kamenice">
+      <div class="body"><h3>Kamenice</h3><p class="adr">Olivová 1412, Kamenice</p><span class="dny">středa – čtvrtek</span></div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.6rem;" data-r><a href="kontakt.html" class="btn-solid">Kontakt a objednání</a></div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div data-r>
+    <h2 class="title">První krok je <em>nejtěžší</em></h2>
+    <p class="lead">Objednání na konzultaci je možné e-mailem nebo telefonicky. V klidu probereme, co Vás přivádí.</p>
+    <a href="kontakt.html" class="btn-solid">Objednat se</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a href="index.html" class="footer-logo">AVIS - TERAPIE<span>.</span></a>
+      <p class="footer-desc">Poradenská psychoterapie a osobnostní rozvoj v daseinsanalytickém směru.<br>Mgr. Iva Semíková, psychoterapeut · IČO 01622676</p>
+    </div>
+    <div class="footer-col">
+      <h4>Menu</h4>
+      <ul><li><a href="index.html">Úvod</a></li><li><a href="index.html#ocekavat">Co můžete očekávat</a></li><li><a href="o-mne.html">O mně</a></li><li><a href="cenik.html">Ceník a podmínky</a></li><li><a href="kontakt.html">Kontakt</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Poradny</h4>
+      <ul class="footer-hours"><li><span>Praha 11 – Chodov</span><span>po–út</span></li><li><span>Kamenice</span><span>st–čt</span></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontakt</h4>
+      <ul><li><a href="tel:+420777312500">+420 777 312 500</a></li><li><a href="mailto:iva.semikova@seznam.cz">iva.semikova@seznam.cz</a></li><li><a href="kontakt.html">Objednání</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 AVIS - TERAPIE · Vytvořeno s ❤️ od <a href="https://strankyprovas.cz">StránkyProVás</a></p>
+    <p class="footer-copy">Všechna práva vyhrazena</p>
+  </div>
+</footer>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Nahoru">↑</button>
+
+<script>
+window.addEventListener('scroll', () => {
+  const s = window.scrollY, h = document.documentElement.scrollHeight - innerHeight;
+  document.getElementById('progress').style.transform = `scaleX(${h ? s/h : 0})`;
+  document.getElementById('navbar').classList.toggle('scrolled', s > 60);
+  document.getElementById('back-top').classList.toggle('show', s > 400);
+}, {passive:true});
+const ham = document.getElementById('ham'), mNav = document.getElementById('mobile-nav');
+ham.addEventListener('click', () => mNav.classList.add('open'));
+document.getElementById('close-nav').addEventListener('click', () => mNav.classList.remove('open'));
+mNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mNav.classList.remove('open')));
+const revObs = new IntersectionObserver(es => { es.forEach((e,i) => { if(e.isIntersecting){ setTimeout(() => e.target.classList.add('visible'), i*70); revObs.unobserve(e.target); } }); }, {threshold:.12});
+document.querySelectorAll('[data-r]').forEach(el => revObs.observe(el));
+</script>
+</body>
+</html>
